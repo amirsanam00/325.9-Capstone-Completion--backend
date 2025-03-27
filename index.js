@@ -8,7 +8,9 @@ import mongoose from "mongoose";
 // Routers
 // import { healthRouter } from "./routes/health.js";
 import userRouter from "./routes/user.js";
+import itineraryRoutes from "./routes/itinerary.js";
 // import coffeeRouter from "./routes/coffee.js";
+
 
 dotenv.config();
 // console.log(process.env.MONGODB_URI);
@@ -21,7 +23,6 @@ await mongoose
   .catch((e) => console.error(e));
 
 const PORT = process.env.PORT || 4000;
-
 const app = express();
 
 // View Engine
@@ -35,6 +36,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
+// Where is this api coming form??
+app.use("/api/itineraries", itineraryRoutes);
 
 // Routes
 app.get("/", (req, res) => {
