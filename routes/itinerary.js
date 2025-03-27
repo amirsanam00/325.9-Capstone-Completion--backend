@@ -27,5 +27,30 @@ router.get('/', async (req, res) => {
     }
   });
   
+  // UPDATE itinerary (PUT)
+router.put('/:id', async (req, res) => {
+  try {
+    const updated = await Itinerary.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updated);
+  } catch (err) {
+    console.error("Update error:", err);
+    res.status(500).json({ message: 'Failed to update itinerary' });
+  }
+});
+
+// DELETE itinerary
+router.delete('/:id', async (req, res) => {
+  try {
+    await Itinerary.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Itinerary deleted successfully' });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ message: 'Failed to delete itinerary' });
+  }
+});
 
 export default router;

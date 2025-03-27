@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 // import { healthRouter } from "./routes/health.js";
 import userRouter from "./routes/user.js";
 import itineraryRoutes from "./routes/itinerary.js";
-// import coffeeRouter from "./routes/coffee.js";
+import contactRoutes from "./routes/contact.js";
 
 
 dotenv.config();
@@ -36,8 +36,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
-// Where is this api coming form??
 app.use("/api/itineraries", itineraryRoutes);
+app.use ("/api/contact", contactRoutes); 
 
 // Routes
 app.get("/", (req, res) => {
@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
 // API Routes
 // app.use("/api/health", healthRouter);
 app.use("/api/user", userRouter);
-// app.use("/api/coffee", coffeeRouter);
+
 
 // Global error handling
 app.use((err, req, res, next) => {
